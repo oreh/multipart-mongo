@@ -13,8 +13,12 @@
         , "node-uuid": "1.3.3"
         , "mongoskin": "0.3.0"
         , "mime": "1.2.5"
-    },
-    "repository" : [
+        }
+    , "devDependencies":{
+          "mocha": "*"
+        , "should": "*"
+        }
+    , "repository" : [
         { "type":"git", "url":"https://github.com/oreh/multipart-mongo" }
     ]
 }

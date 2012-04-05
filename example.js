@@ -10,8 +10,11 @@ var connect = require("connect")
 
 db.open(function(err, db){
     var app = connect();
+    app.use(connect.json());
+    app.use(connect.urlencoded());
     app.use(multipart());
     app.use(function(req, res){
+        console.log(req.headers);
         if (req.method == 'GET'){
             res.end('Try POST a file\n');
             return;

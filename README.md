@@ -2,6 +2,8 @@
 
 Mutliple-mongo is an extension of the [Multipart](http://www.senchalabs.org/connect/multipart.html) middleware from [Connect](http://www.senchalabs.org/connect/). The goal of multipart-mongo is to make it easy for developers to store uploaded files direclty into mongodb (i.e. GridFS). 
 
+Ensure that mongodb is installed and running locally. Then start a server as follows
+
 ```js
 var inspect = require('util').inspect;
 var mongo = require('mongoskin');
@@ -30,3 +32,16 @@ db.open(function(err, db){
     app.listen(3000);
     console.log('Server is running at port 3000. POST to "/" to upload file');
 })
+
+From the console, one can upload a file using curl.
+
+```
+curl -X POST -F "targets=@test.txt" "http://localhost:3000/"
+
+By default, uploaded files will be stored in collection fs.files with a chunksize of 256k. One can customize the chunksize by passing chunk-size option in the request header.
+
+```
+curl -X POST -F "targets=@test.txt" "http://localhost:3000/" -H "chunk-size:64k"
+
+Valid chunk-size options are ['1k', '4k', '16k', '64k', '256k', '1m', '4m']
+
